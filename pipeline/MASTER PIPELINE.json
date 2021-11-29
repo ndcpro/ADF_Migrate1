@@ -97,11 +97,11 @@
 				}
 			},
 			{
-				"name": "END BATCH",
+				"name": "END BATCH SUCCESS",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "VUS_ETL_MASTER",
+						"activity": "GET BATCH_ID",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -133,11 +133,11 @@
 				}
 			},
 			{
-				"name": "VUS_ETL_MASTER",
+				"name": "REFRESH AS DATASET SUCCESS",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "GET BATCH_ID",
+						"activity": "END BATCH SUCCESS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -146,20 +146,20 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "VUS_ETL_MASTER",
+						"referenceName": "REFRESH AS GENERAL",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
 				}
 			},
 			{
-				"name": "PAUSE SYNAPSE",
+				"name": "PAUSE SYNAPSE SUCCESS",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "REFRESH AS GENERAL",
+						"activity": "REFRESH AS DATASET SUCCESS",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -173,11 +173,47 @@
 				}
 			},
 			{
-				"name": "REFRESH AS GENERAL",
+				"name": "END BATCH FAILED",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "GET BATCH_ID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[ADF].[proc_etl_end_batch]",
+					"storedProcedureParameters": {
+						"p_batch_id": {
+							"value": {
+								"value": "@variables('BATCH_ID')",
+								"type": "Expression"
+							},
+							"type": "Int64"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_DWH_SYNAPSE_DEV",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "REFRESH AS DATASET FAILED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "END BATCH",
+						"activity": "END BATCH FAILED",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -187,6 +223,52 @@
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "REFRESH AS GENERAL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PAUSE SYNAPSE FAILED",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "REFRESH AS DATASET FAILED",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PAUSE SYNAPSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "STOP SYNAPSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PAUSE SYNAPSE SUCCESS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PAUSE SYNAPSE FAILED",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PAUSE SYNAPSE",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -209,7 +291,7 @@
 			"name": "VUS MASTER"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-11-28T11:38:52Z"
+		"lastPublishTime": "2021-11-18T14:52:32Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

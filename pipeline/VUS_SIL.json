@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "SIL_GROUP_TQM",
+				"name": "FACT",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "SIL_GROUP_ASA",
+						"activity": "DIM",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "VUS_SIL_GROUP_TQM",
+						"referenceName": "VUS_SIL_FACT",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true,
@@ -29,39 +29,13 @@
 				}
 			},
 			{
-				"name": "SIL_GROUP_ASA",
+				"name": "DIM",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "VUS_SIL_GROUP_ASA",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"BATCH_ID": {
-							"value": "@pipeline().parameters.BATCH_ID",
-							"type": "Expression"
-						}
-					}
-				}
-			},
-			{
-				"name": "SIL_GROUP_QLGV",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "SIL_GROUP_TQM",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "VUS_SIL_GROUP_QLGV",
+						"referenceName": "VUS_SIL_DIM",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true,
@@ -83,7 +57,7 @@
 			"name": "VUS_ETL"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-11-28T11:18:48Z"
+		"lastPublishTime": "2021-11-18T14:52:31Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

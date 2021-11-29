@@ -232,15 +232,15 @@
 		"parameters": {
 			"TenantID": {
 				"type": "String",
-				"defaultValue": "d1005fc5-bff9-42d5-81e5-1f3fcb089799"
+				"defaultValue": "3af2f3f2-a318-4004-ae5b-06933eb113c6"
 			},
 			"ClientID": {
 				"type": "String",
-				"defaultValue": "0cd077ea-2e1f-44bc-a43d-0c5b31913f91"
+				"defaultValue": "900db92c-9aeb-44e9-8314-0e84a1da11dc"
 			},
 			"ClientSecret": {
 				"type": "String",
-				"defaultValue": "S5Q7Q~KLJ9isDTz.84LEjyGxHr4BLr3jhvFsd"
+				"defaultValue": "zz6ZcRFP829._-Cs.31H6R4-mI0E6jiMae"
 			},
 			"Region": {
 				"type": "String",
@@ -248,11 +248,11 @@
 			},
 			"Server": {
 				"type": "String",
-				"defaultValue": "vusasdev"
+				"defaultValue": "ktcasprod"
 			},
 			"DatabaseName": {
 				"type": "String",
-				"defaultValue": "VUSBI"
+				"defaultValue": "KTC Model"
 			},
 			"RefreshRequestBody": {
 				"type": "string",
@@ -269,7 +269,7 @@
 			"name": "AZURE AS"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-11-28T12:26:15Z"
+		"lastPublishTime": "2021-11-18T14:52:30Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

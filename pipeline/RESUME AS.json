@@ -122,26 +122,26 @@
 		"parameters": {
 			"TenantID": {
 				"type": "String",
-				"defaultValue": "d1005fc5-bff9-42d5-81e5-1f3fcb089799"
+				"defaultValue": "3af2f3f2-a318-4004-ae5b-06933eb113c6"
 			},
 			"SubscriptionID": {
 				"type": "String",
-				"defaultValue": "d607421b-81ca-426a-8942-2fd12f5c9611"
+				"defaultValue": "959c8737-48f3-4137-9de0-6ba42de71200"
 			},
 			"ResourceGroup": {
 				"type": "String",
-				"defaultValue": "DWCLOUD-DEV"
+				"defaultValue": "ktc-rsg-prod"
 			},
 			"ServerName": {
 				"type": "String",
-				"defaultValue": "vusasdev"
+				"defaultValue": "ktcasprod"
 			}
 		},
 		"folder": {
 			"name": "AZURE AS"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-11-28T11:38:52Z"
+		"lastPublishTime": "2021-11-18T14:52:30Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

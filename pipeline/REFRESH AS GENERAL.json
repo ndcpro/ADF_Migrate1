@@ -82,7 +82,6 @@
 					},
 					"waitOnCompletion": true,
 					"parameters": {
-						"ClientID": "0cd077ea-2e1f-44bc-a43d-0c5b31913f91",
 						"RefreshRequestBody": {
 							"value": "@variables('List_Table')",
 							"type": "Expression"
@@ -113,7 +112,7 @@
 			"name": "AZURE AS"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-11-28T12:25:53Z"
+		"lastPublishTime": "2021-11-18T14:52:31Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

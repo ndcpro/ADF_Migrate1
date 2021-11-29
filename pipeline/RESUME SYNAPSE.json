@@ -78,6 +78,10 @@
 									"type": "Expression"
 								},
 								"method": "POST",
+								"body": {
+									"value": "{}",
+									"type": "Expression"
+								},
 								"authentication": {
 									"type": "MSI",
 									"resource": "https://management.core.windows.net/"
@@ -95,22 +99,22 @@
 			},
 			"resourceGroups": {
 				"type": "string",
-				"defaultValue": "DWCLOUD-DEV"
+				"defaultValue": "DWCLOUD-Prod"
 			},
 			"servers": {
 				"type": "string",
-				"defaultValue": "vus-synapse-ws"
+				"defaultValue": "vus-synapseprod-ws"
 			},
 			"databases": {
 				"type": "string",
-				"defaultValue": "VUSDWHDEV"
+				"defaultValue": "VUSDWHPROD"
 			}
 		},
 		"folder": {
 			"name": "AZURE SYNAPSE"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-07-24T04:12:09Z"
+		"lastPublishTime": "2021-11-18T14:52:30Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
